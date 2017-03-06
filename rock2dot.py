@@ -9,12 +9,12 @@ outf.write("digraph \"" + infile + "\" {\n")
 for line in inf.readlines():
     if "#" not in line:
         if ".connect_to" in line:
-            splitted = line.lstrip().split(".connect_to ")
-            sourceSplit = splitted[0].split(".")
-            targetSplit = splitted[1].split(".")
-            sourceNode,sourcePort = sourceSplit[0],sourceSplit[1]
-            targetNode,targetPort = targetSplit[0],targetSplit[1]
-            outf.write(sourceNode + " -> " + targetNode + "[ taillabel=\"" + sourcePort + "\"" + " headlabel=\"" + targetPort + "\""+ "];\n")
+            splitted = line.lstrip().replace("\n","").split(".connect_to ")
+            sourceSplit = splitted[0].lstrip().split(".")
+            targetSplit = splitted[1].lstrip().split(".")
+            sourceNode,sourcePort = "\""+sourceSplit[0]+"\"","\""+sourceSplit[1]+"\""
+            targetNode,targetPort = "\""+targetSplit[0]+"\"","\""+targetSplit[1]+"\""
+            outf.write(sourceNode + " -> " + targetNode + "[ taillabel=" + sourcePort + " headlabel=" + targetPort + " ];\n")
 
 outf.write("}\n")
 
