@@ -5,6 +5,8 @@ infile, outfile = sys.argv[1], sys.argv[2]
 inf,outf = open(infile), open(outfile,"w")
 
 outf.write("digraph \"" + infile + "\" {\n")
+outf.write("graph [nodesep=1.5 ranksep=1.0];\n")
+outf.write("node [margin=0.2 shape=box];\n")
 
 for line in inf.readlines():
     if "#" not in line:
