@@ -17,6 +17,12 @@ for line in inf.readlines():
             sourceNode,sourcePort = "\""+sourceSplit[0]+"\"","\""+sourceSplit[1]+"\""
             targetNode,targetPort = "\""+targetSplit[0]+"\"","\""+targetSplit[1]+"\""
             outf.write(sourceNode + " -- " + targetNode + "[ taillabel=" + sourcePort + " headlabel=" + targetPort + " ];\n")
+        if ".log(" in line:
+            splitted = line.lstrip().replace("\n","").split(".log(")
+            targetNode = splitted[0].lstrip()
+            sourceSplit = splitted[1].lstrip().replace(")","").split(".")
+            sourceNode,sourcePort = "\""+sourceSplit[0]+"\"","\""+sourceSplit[1]+"\""
+            outf.write(sourceNode + " -- " + targetNode + "[ taillabel=" + sourcePort + " ];\n")
 
 outf.write("}\n")
 
